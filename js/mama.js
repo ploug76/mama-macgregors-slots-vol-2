@@ -42,11 +42,12 @@ M.draw=function(x,y,h,o){o=o||{};const u=h/100,t=o.t!=null?o.t:K.t,dir=o.dir||1,
  E(0,shY+8*u,3.2*u,3.2*u,'#c9ccd1');E(0,shY+8*u,1.6*u,1.6*u,'#e03131');
  // head
  const hy=shY-16*u;E(0,hy-6*u,15*u,10*u,'#c8541e');for(let i=0;i<8;i++)E(Math.cos(i*.8)*13*u,hy+Math.sin(i*.8)*8*u-2*u,5*u,5*u,i%2?'#d8682a':'#c8541e');
- E(0,hy+2*u,12*u,13*u,'#f6d2b4');E(-7*u,hy+7*u,3.3*u,2.5*u,'rgba(240,120,120,.45)');E(7*u,hy+7*u,3.3*u,2.5*u,'rgba(240,120,120,.45)');
+ E(0,hy+2*u,12*u,13*u,'#f6d2b4');/* facing check (Oct 30 2026): walking -> face turns 3/4 toward travel (+x after dir flip) */const tu=mode==='walk'?.9:0;g.save();g.translate(tu*3.6*u,0);g.scale(1-.2*tu,1);if(tu)E(11.2*u,hy+3.5*u,2.6*u*tu,2.4*u,'#f6d2b4');E(-7*u,hy+7*u,3.3*u,2.5*u,'rgba(240,120,120,.45)');E(7*u,hy+7*u,3.3*u,2.5*u,'rgba(240,120,120,.45)');
  for(let i=0;i<6;i++)E(-11*u+i*4.4*u,hy-9*u+Math.abs(i-2.5)*.8*u,3.6*u,3.4*u,i%2?'#d8682a':'#c8541e');
  g.strokeStyle='#6a4a2a';g.lineWidth=1.4*u;g.beginPath();g.arc(-4.8*u,hy+1*u,3.8*u,0,TAU);g.moveTo(8.6*u,hy+1*u);g.arc(4.8*u,hy+1*u,3.8*u,0,TAU);g.moveTo(-1*u,hy+1*u);g.lineTo(1*u,hy+1*u);g.stroke();
  const bl=(t%4)>3.85;if(bl){g.beginPath();g.moveTo(-6.5*u,hy+1*u);g.lineTo(-3*u,hy+1*u);g.moveTo(3*u,hy+1*u);g.lineTo(6.5*u,hy+1*u);g.stroke()}else{E(-4.8*u,hy+1*u,1.4*u,1.5*u,'#3a2a1a');E(4.8*u,hy+1*u,1.4*u,1.5*u,'#3a2a1a')}
  if(o.talk&&Math.sin(t*16)>0){E(0,hy+9*u,3*u,2.4*u,'#b8404a')}else{g.strokeStyle='#b8404a';g.lineWidth=1.6*u;g.beginPath();g.arc(0,hy+6.5*u,3.6*u,.3,2.8);g.stroke()}
+ g.restore();
  // tam o'shanter
  E(0,hy-12*u,16*u,5.5*u,'#1f4a3c');g.save();g.beginPath();g.ellipse(0,hy-14*u,14*u,6*u,0,Math.PI,TAU);g.closePath();g.clip();M.tartan(-15*u,hy-21*u,30*u,8*u,6*u);g.restore();
  E(0,hy-9.5*u,15*u,2*u,'#141c3c');E(2*u,hy-20*u,4*u,4*u,'#d6336c');
